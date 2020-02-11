@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.retrofitresponse.retrofit.PtcApi;
 import com.example.retrofitresponse.retrofit.PtcClient;
@@ -32,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<PtcRoot> call, Response<PtcRoot> response) {
                 Log.w("MainActivity", "Respone Data: "+response.body());
+                Toast.makeText(getApplicationContext(), "Response data: "+response.body().getNewsUrl(), Toast.LENGTH_SHORT).show();
                 lText.setText(""+response.body().getApi_version()+" "+response.body().getAudiogurbani()
                 +" "+response.body().getNewsUrl());
             }
 
             @Override
             public void onFailure(Call<PtcRoot> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Response Failed: "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
